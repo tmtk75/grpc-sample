@@ -11,3 +11,8 @@ server
 __pycache__
 *_pb2.py
 *_pb2_grpc.py
+
+# Node
+node_modules
+yarn.lock
+*_pb.js

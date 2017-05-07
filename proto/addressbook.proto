@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package addressbook;
+
+import "person.proto";
+
+service AddressBook {
+  rpc AddPerson(Person) returns (NoContent) {}
+  rpc ListPeople(NoArgs) returns (stream Person) {}
+}
+
+message NoContent {}
+
+message NoArgs {}

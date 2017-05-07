@@ -9,8 +9,8 @@ const client = new addressbook.AddressBook('localhost:12345', secrets);
 function list() {
   const call = client.listPerson(new addressbook.NoArgs());
   call.on('data', function(res) { console.log(res); });
-  call.on('end', function() { console.log("end"); });
-  call.on('status', function(status) { console.log("status:", status); });
+  //call.on('end', function() { console.log("end"); });
+  //call.on('status', function(status) { console.log("status:", status); });
 }
 
 function add(argv) {

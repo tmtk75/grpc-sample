@@ -2,11 +2,13 @@
 
 goal: server client
 
-server: server.go
+server: server.go proto/addressbook.pb.go
 	go build -o server server.go
 
-client: client.go
+client: client.go proto/addressbook.pb.go
 	go build -o client client.go
+
+proto/addressbook.pb.go: gen-go
 
 gen-go: ./proto/*.proto
 	protoc --proto_path ./proto \
@@ -32,3 +34,9 @@ pip-install: .e/bin/activate
 
 .e/bin/activate:
 	python3 -m venv .e
+
+brew-install:
+	brew install protobuf yarn python3
+
+clean:
+	rm -f proto/*.pb.go *_pb*.* client server

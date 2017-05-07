@@ -1,2 +1,4 @@
 .*.swp
 *.pb.go
+client
+server

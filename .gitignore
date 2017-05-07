@@ -1,4 +1,13 @@
+.env
 .*.swp
+
+# Golang
 *.pb.go
 client
 server
+
+# Python
+.e
+__pycache__
+*_pb2.py
+*_pb2_grpc.py

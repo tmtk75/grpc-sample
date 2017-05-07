@@ -8,7 +8,20 @@ server: server.go
 client: client.go
 	go build -o client client.go
 
-gen: ./proto/*.proto
+gen-go: ./proto/*.proto
 	protoc --proto_path ./proto \
 		--go_out=plugins=grpc:./proto \
 		proto/*.proto 
+gen-py:
+	.e/bin/python -m grpc_tools.protoc \
+		--proto_path proto \
+		--python_out=. \
+		--grpc_python_out=. \
+		./proto/*.proto
+
+pip-install: .e/bin/activate
+	.e/bin/pip install -r requirements.txt
+
+.e/bin/activate:
+	python3 -m venv .e
+

@@ -39,4 +39,7 @@ brew-install:
 	brew install protobuf yarn python3
 
 clean:
-	rm -f proto/*.pb.go *_pb*.* client server
+	rm -rf proto/*.pb.go *_pb*.* client server __pycache__
+
+distclean: clean
+	rm -rf .e node_modules

@@ -6,7 +6,7 @@ import "person.proto";
 
 service AddressBook {
   rpc AddPerson(Person) returns (NoContent) {}
-  rpc ListPeople(NoArgs) returns (stream Person) {}
+  rpc ListPerson(NoArgs) returns (stream Person) {}
 }
 
 message NoContent {}

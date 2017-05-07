@@ -1,4 +1,4 @@
-./proto/addressbook.pb.go: ./proto/addressbook.proto
+gen: ./proto/*.proto
 	protoc --proto_path ./proto \
 		--go_out=plugins=grpc:./proto \
-		proto/addressbook.proto 
+		proto/*.proto 

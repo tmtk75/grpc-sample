@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -8,7 +9,6 @@ import (
 	"github.com/jawher/mow.cli"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/grpclog"
 
 	pb "github.com/tmtk75/grpc-sample/proto"
 )
@@ -25,7 +25,10 @@ func main() {
 	app := cli.App("client", "gRPC sample client")
 	app.Command("list", "List all people", func(c *cli.Cmd) {
 		c.Action = func() {
-			list(client)
+			err := list(client)
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	})
 	app.Command("add", "Add a person", func(c *cli.Cmd) {
@@ -35,7 +38,10 @@ func main() {
 		)
 		c.Spec = "NAME [AGE]"
 		c.Action = func() {
-			add(client, *name, *age)
+			err := add(client, *name, *age)
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	})
 	app.Run(os.Args)
@@ -55,7 +61,7 @@ func list(c pb.AddressBookClient) error {
 		if err != nil {
 			return err
 		}
-		grpclog.Println(p)
+		fmt.Println(p)
 	}
 
 	return nil

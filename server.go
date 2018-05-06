@@ -1,13 +1,12 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net"
 	"sync"
 
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/grpclog"
 
 	pb "github.com/tmtk75/grpc-sample/proto"
 )
@@ -28,7 +27,8 @@ type ab struct {
 }
 
 func (a *ab) AddPerson(ctx context.Context, p *pb.Person) (*pb.NoContent, error) {
-	grpclog.Println(*p)
+	log.Println(*p, a.people)
+	//grpclog.Println(*p)
 	a.m.Lock()
 	defer a.m.Unlock()
 	a.people = append(a.people, p)
@@ -38,7 +38,7 @@ func (a *ab) AddPerson(ctx context.Context, p *pb.Person) (*pb.NoContent, error)
 func (a *ab) ListPerson(_ *pb.NoArgs, stream pb.AddressBook_ListPersonServer) error {
 	a.m.Lock()
 	defer a.m.Unlock()
-	grpclog.Printf("number of people: %v", len(a.people))
+	log.Printf("number of people: %v", len(a.people))
 	for _, p := range a.people {
 		err := stream.Send(p)
 		if err != nil {

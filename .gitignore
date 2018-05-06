@@ -2,6 +2,7 @@
 .*.swp
 
 # Golang
+vendor
 *.pb.go
 client
 server
